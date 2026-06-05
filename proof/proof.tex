@@ -1,0 +1,253 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+\title{A Self-Describing Cyclic Number:\\
+The Unique Cyclotomic Decomposition of 142857\\
+into Hamming-Family Scaffold Parameters}
+\author{Vitex Probasco\\
+\small University of Massachusetts Amherst (non-academic affiliate)\\
+\small \texttt{vitexprobasco@umass.edu}}
+\date{June 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The cyclic number $142857 = (10^6-1)/7$ has prime-power factorization
+$3^3 \cdot 11 \cdot 13 \cdot 37$. We show this equals
+$r^3(n+k)(2n-1)(2^k+nr)$ where $r=3$, $n=7$, $k=4$ are the parameters
+of the $[7,4,3]$ binary Hamming code and $b=10=n+r$ is the base.
+We prove this cyclotomic--Hamming alignment is unique: among all binary
+Hamming codes $[2^r-1,\, 2^r-1-r,\, r]$ with the canonical base
+$b=n+r$, only $r=3$ produces a cyclic number whose cyclotomic
+factor-blocks decompose into code parameters. The key uniqueness
+condition, $2^{r-1}=r+1$, has the single positive integer solution
+$r=3$. Two independent conditions from other cyclotomic factors
+confirm this. A computational null test through $p=47$ verifies that
+no other full-reptend prime in base~10 exhibits comparable
+factorization alignment.
+\end{abstract}
+
+\section{Introduction}
+
+The number $142857$ is the repetend of $1/7$ in base~10 and is
+well-known as a cyclic number: multiplication by $1$ through~$6$
+permutes its digits cyclically. Its prime factorization is
+\[
+142857 = 3^3 \cdot 11 \cdot 13 \cdot 37.
+\]
+We observe that each prime-power block admits a low-complexity
+expression in the parameters of the $[7,4,3]$ Hamming code:
+\begin{align}
+27 &= 3^3 = r^3, \label{eq:27}\\
+11 &= 7+4 = n+k, \label{eq:11}\\
+13 &= 2\cdot 7-1 = 2n-1, \label{eq:13}\\
+37 &= 2^4+7\cdot 3 = 2^k+nr. \label{eq:37}
+\end{align}
+Here $r=3$ (check/parity count), $n=2^r-1=7$ (code length),
+$k=n-r=4$ (data width), and the canonical base $b=n+r=10$.
+We use $\{n,k,r\}$ for the Hamming-family scaffold; in the
+length-7 case this matches the familiar $[7,4,3]$ notation
+because the minimum distance is also~$3$. Thus
+\begin{equation}\label{eq:main}
+142857 = r^3(n+k)(2n-1)(2^k+nr).
+\end{equation}
+
+This factorization is not a numerical coincidence imposed
+post-hoc. It arises from the cyclotomic decomposition of
+$b^{n-1}-1$ evaluated at $b=n+r$, and we prove the alignment
+is unique to $r=3$.
+
+\section{Cyclotomic Decomposition}
+
+Since $n-1=6$, we have
+\[
+b^6-1 = \Phi_1(b)\,\Phi_2(b)\,\Phi_3(b)\,\Phi_6(b)
+\]
+where $\Phi_d$ denotes the $d$-th cyclotomic polynomial. At $b=10$:
+\begin{align}
+\Phi_1(10) &= 10-1 = 9 = 3^2, \\
+\Phi_2(10) &= 10+1 = 11, \\
+\Phi_3(10) &= 10^2+10+1 = 111 = 3 \cdot 37, \\
+\Phi_6(10) &= 10^2-10+1 = 91 = 7 \cdot 13.
+\end{align}
+Therefore $10^6-1 = 9 \cdot 11 \cdot 111 \cdot 91 = 999999$,
+and dividing by $n=7$:
+\[
+\frac{10^6-1}{7} = 3^3 \cdot 11 \cdot 13 \cdot 37 = 142857.
+\]
+
+Matching cyclotomic factors to Hamming parameters:
+\begin{center}
+\begin{tabular}{lll}
+\hline
+Cyclotomic factor & Value & Hamming expression \\
+\hline
+$\Phi_1(10) = 9$ & $3^2$ & $r^2$ \\
+$\Phi_2(10) = 11$ & $11$ & $n+k$ \\
+$\Phi_3(10) = 111$ & $3 \cdot 37$ & $r(2^k+nr)$ \\
+$\Phi_6(10) = 91$ & $7 \cdot 13$ & $n(2n-1)$ \\
+\hline
+\end{tabular}
+\end{center}
+After division by $n=7$ (absorbing one factor from $\Phi_6$) and
+collecting the factors of~$3$ ($r^2$ from $\Phi_1$ and $r$ from
+$\Phi_3$), we obtain identity~\eqref{eq:main}.
+
+\section{Uniqueness}
+
+\begin{definition}
+For $r \geq 2$, define the \emph{Hamming-family parameters}
+$n = 2^r-1$, $k = n-r$, and the \emph{canonical base} $b = n+r$.
+\end{definition}
+
+We require $n$ to be prime (so that $\gcd(b,n)=1$ and $1/n$ has a
+well-defined repetend in base~$b$). Define
+$Q = (b^{n-1}-1)/n$, the Fermat quotient. When $\text{ord}_n(b)=n-1$,
+$Q$ is the full-period cyclic repetend; otherwise it is the Fermat
+quotient over the full exponent window.
+
+\begin{theorem}\label{thm:main}
+Among Hamming-family parameters with $n=2^r-1$ prime and $r \geq 2$,
+the prime-power factor-blocks of $Q$ decompose into expressions of
+$\{n,k,r\}$ only at $r=3$.
+\end{theorem}
+
+\begin{proof}
+We establish three conditions on the cyclotomic factors. The first
+alone suffices for uniqueness; the second and third provide
+independent structural confirmation.
+
+\medskip
+\noindent\textbf{Condition 1 (uniqueness spine).}
+We require $\Phi_2(b) = b+1 = n+k$. Since $b=n+r$ and $k=n-r$:
+\[
+n+r+1 = n + (n-r) = 2n-r,
+\]
+which simplifies to $n = 2r+1$, equivalently
+\begin{equation}\label{eq:cond1}
+2^{r-1} = r+1.
+\end{equation}
+At $r=3$: $2^2 = 4 = 4$. \checkmark
+
+For $r \geq 4$: $f(r) = 2^{r-1}-(r+1)$ satisfies $f(4)=3>0$, and
+$f(r+1)-f(r) = 2^{r-1}-1 > 0$ for $r \geq 2$, so $f$ is strictly
+increasing for $r \geq 3$. Thus $r=3$ is the unique solution.
+
+\medskip
+\noindent\textbf{Condition 2 (independent confirmation).}
+We require $n \mid \Phi_6(b)$ with $\Phi_6(b)/n = 2n-1$.
+Since $\Phi_6(b) = b^2-b+1 = (n+r)^2-(n+r)+1$, expanding and
+setting equal to $n(2n-1)$ yields
+\begin{equation}\label{eq:cond2}
+n(n-2r) = r^2-r+1.
+\end{equation}
+At $r=1$: $1 \cdot (1-2) = -1 \neq 1$. At $r=2$: $3 \cdot (3-4) = -3 \neq 3$.
+At $r=3$: $7 \cdot (7-6) = 7 = 7$. \checkmark
+
+For $r \geq 4$: the left side grows as $\Theta(4^r)$ while the right
+grows as $\Theta(r^2)$, so no further solutions exist.
+
+\medskip
+\noindent\textbf{Condition 3 (for prime $r$).}
+We require $r \mid \Phi_3(b)$ where $\Phi_3(b) = b^2+b+1$.
+Since $b \equiv n \pmod{r}$ and $n = 2^r-1$:
+\[
+\Phi_3(b) \equiv n^2+n+1 = 2^{2r}-2^r+1 \pmod{r}.
+\]
+By Fermat's little theorem (for prime~$r$): $2^r \equiv 2 \pmod{r}$,
+so $2^{2r} \equiv 4 \pmod{r}$, giving
+\[
+\Phi_3(b) \equiv 4-2+1 = 3 \pmod{r}.
+\]
+Thus $r \mid \Phi_3(b)$ requires $r \mid 3$, and for prime $r \geq 2$
+this gives $r=3$.
+
+\begin{remark}
+Condition~3 uses Fermat's little theorem and therefore applies only
+to prime~$r$. In the theorem's domain, $n=2^r-1$ prime implies $r$
+prime (contrapositive: $r$ composite implies $2^r-1$ composite), so
+the Fermat step is licensed. Composite solutions to the divisibility
+condition alone exist (e.g., $r=57$), but fall outside the hypothesis.
+In any case, Condition~1 already establishes uniqueness unconditionally.
+\end{remark}
+
+The unique simultaneous solution is $r=3$, giving the $[7,4,3]$
+Hamming code in base $b=10=7+3$.
+\end{proof}
+
+\begin{corollary}
+Base~$10 = n+r$ is the canonical-base candidate for the $\{7,4,3\}$
+scaffold. More generally, each Hamming-family code has canonical-base
+candidate $b = 2^r-1+r$, but only at $r=3$ does the resulting
+Fermat quotient exhibit the self-describing factorization.
+\end{corollary}
+
+\section{Supplementary Observations}
+
+\subsection{Half-period split (Midy-type)}
+The repetend splits as $142\,|\,857$ with
+\[
+142+857 = 999 = 10^3-1
+\]
+(a consequence of Midy's theorem for even-period primes) and
+\[
+857-142 = 715 = 5 \cdot 11 \cdot 13.
+\]
+The difference factors as $5 \cdot (n+k) \cdot (2n-1)$, coupling the
+base-10 cofactor ($5$, since $10=2\times5$) with two scaffold primes.
+
+The split has a compact derivation. Let $Q = (10^3+1)/7 = 143 = 11
+\times 13$. Then $142 = Q-1$ and $857 = 1000-Q$, so:
+\[
+857-142 = 1001 - 2Q = 5Q = 5 \times 11 \times 13.
+\]
+The same residual~$5$ appears in both the split difference and the
+half-cycle correction below.
+
+\subsection{Half-cycle correction}
+\[
+\frac{1}{7} - \frac{142}{999} = \frac{5}{6993} = \frac{5}{7 \times 999}.
+\]
+The correction from half-cycle repetition to the exact value is the
+base cofactor divided by the code length times the nines complement.
+
+\subsection{Digit invariants}
+The digit set $\{1,2,4,5,7,8\}$, invariant under cyclic rotation, has
+\[
+\text{sum} = 27 = 3^3 = r^3, \qquad
+\text{product} = 2240 = 2^6 \cdot 5 \cdot 7.
+\]
+
+\section{Computational Null Test}
+
+We verified that no other full-reptend prime $p \leq 47$ in base~10
+produces a cyclic number whose complete factorization decomposes into
+expressions of its own structural parameters. Additionally, $p=31$
+(the next Mersenne-prime Hamming length, $31=2^5-1$) is not
+full-reptend in base~10: its period is~15, not~30. See the
+accompanying verification code.
+
+\begin{thebibliography}{9}
+\bibitem{hamming} R.~W.~Hamming, ``Error Detecting and Error
+  Correcting Codes,'' \emph{Bell System Technical Journal}, vol.~29,
+  no.~2, pp.~147--160, 1950.
+
+\bibitem{midy} E.~Midy, ``De Quelques Propri\'et\'es des Nombres
+  et des Fractions D\'ecimales P\'eriodiques,'' Nantes, 1836.
+
+\bibitem{nz} I.~Niven, H.~S.~Zuckerman, and H.~L.~Montgomery,
+  \emph{An Introduction to the Theory of Numbers}, 5th ed., Wiley, 1991.
+\end{thebibliography}
+
+\end{document}

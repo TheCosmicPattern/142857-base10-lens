@@ -3,3 +3,8 @@ __pycache__/
 .DS_Store
 *.swp
 *.tmp
+proof/*.aux
+proof/*.log
+proof/*.out
+proof/*.synctex.gz
+docs/images_backup/
