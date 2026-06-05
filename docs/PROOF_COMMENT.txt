@@ -1,0 +1,55 @@
+**Here's my rough attempt at a proof of the factorization that this is unique to 7 in base 10:**
+____
+
+Let the Hamming-family parameters be:
+
+    n = 2^r - 1
+    k = n - r
+    b = n + r
+
+    So for r = 3:
+      n = 7 ; k = 4 ; b = 10
+    b^(n−1) - 1 splits via cyclotomic polynomials Φ_d(b).
+
+There are three divisibility conditions that must hold simultaneously for the factors of (b^(n - 1) - 1) / n to decompose into {n,k,r}-expressions. The first condition alone is sufficient for uniqueness; the second and third provide independent confirmation from different parts of the cyclotomic structure:
+
+    FIRST (the uniqueness spine):
+    Φ₂(b) = b+1 = n+k
+      requires k = r+1, i.e. 2^(r−1) = r+1.
+    Exponential exceeds linear for r ≥ 4 by induction.
+      Unique solution: r = 3
+
+    SECOND (independent confirmation):
+    n | Φ₆(b)  with Φ₆(b) / n = 2n - 1
+      With b = n+r, this requires: (n+r)² - (n+r) + 1 = n(2n - 1) .
+      equivalently: n(n - 2r) =r² - r + 1
+    Substituting n = 2^r-1 gives the nontrivial solution r=3.
+    Direct check knocks out r = 1 and r = 2; for r ≥ 4 the exponential side has already escaped the small cyclotomic closure.
+
+    THIRD (for prime r only):
+    r | Φ₃(b)
+      Since b = n+r = 2^r−1+r, reducing mod r gives:
+      Φ₃(b) ≡ ( 2^r- 1)² + (2^r - 1) + 1 mod r
+
+     This requires:
+      r | (2^(2r)- 2^r +1)
+
+    Going about this by Fermat, for prime r:
+      2^(2r) - 2^r+1 ≡ 3 mod r .
+      r | 3, giving r = 3
+    (Note: this argument requires r prime. For composite r, Fermat's little theorem doesn't apply and there exist composite solutions like r=57. But the first condition already establishes uniqueness regardless.)
+
+The unique simultaneous solution is precisely r = 3 ... which is the [7,4,3] Hamming code in base (10 = 7+3)
+
+And in that case:
+
+    10^6 - 1 splits through:
+
+      Φ₁(10) = 9 = 3²
+      Φ₂(10) = 11 = 7+4  .
+      Φ₃(10) = 111 = 3 × 37 = 3 × (2⁴ +7·3)
+      Φ₆(10) = 91 = 7 × 13 = 7 × (2·7-1)
+
+    So dividing by 7 gives: (10^6 -1)/7 = 3³ × 11 × 13 × 37
+    which is exactly:
+    142857 = 3³ × (7+4) × (2·7-1) × (2⁴ + 7·3)
