@@ -8,3 +8,5 @@ proof/*.log
 proof/*.out
 proof/*.synctex.gz
 docs/images_backup/
+*.zip
+__MACOSX/

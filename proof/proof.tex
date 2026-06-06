@@ -28,7 +28,7 @@ $3^3 \cdot 11 \cdot 13 \cdot 37$. We show this equals
 $r^3(n+k)(2n-1)(2^k+nr)$ where $r=3$, $n=7$, $k=4$ are the parameters
 of the $[7,4,3]$ binary Hamming code and $b=10=n+r$ is the base.
 We prove this cyclotomic--Hamming alignment is unique: among all binary
-Hamming codes $[2^r-1,\, 2^r-1-r,\, r]$ with the canonical base
+Hamming-family scaffolds $\{2^r-1,\,2^r-1-r,\,r\}$ with the canonical base
 $b=n+r$, only $r=3$ produces a cyclic number whose cyclotomic
 factor-blocks decompose into code parameters. The key uniqueness
 condition, $2^{r-1}=r+1$, has the single positive integer solution
@@ -106,6 +106,12 @@ $\Phi_3$), we obtain identity~\eqref{eq:main}.
 
 \section{Uniqueness}
 
+\begin{definition}[Self-describing]
+A Fermat quotient $Q = (b^{n-1}-1)/n$ is \emph{self-describing}
+relative to a Hamming-family scaffold when its cyclotomic
+factor-blocks are exhausted by scaffold expressions in $\{n,k,r\}$.
+\end{definition}
+
 \begin{definition}
 For $r \geq 2$, define the \emph{Hamming-family parameters}
 $n = 2^r-1$, $k = n-r$, and the \emph{canonical base} $b = n+r$.
@@ -155,8 +161,8 @@ n(n-2r) = r^2-r+1.
 At $r=1$: $1 \cdot (1-2) = -1 \neq 1$. At $r=2$: $3 \cdot (3-4) = -3 \neq 3$.
 At $r=3$: $7 \cdot (7-6) = 7 = 7$. \checkmark
 
-For $r \geq 4$: the left side grows as $\Theta(4^r)$ while the right
-grows as $\Theta(r^2)$, so no further solutions exist.
+For $r \geq 4$: $n = 2^r-1 \geq 3r$, so $n-2r \geq r$, giving
+$n(n-2r) \geq 3r \cdot r = 3r^2 > r^2-r+1$. No further solutions.
 
 \medskip
 \noindent\textbf{Condition 3 (for prime $r$).}

@@ -65,8 +65,8 @@ Setting Φ_6(b) = n(2n−1) and expanding:
 At r = 1: n = 1. LHS = 1(1−2) = −1. RHS = 1. Fails (sign).
 At r = 2: n = 3. LHS = 3(3−4) = −3. RHS = 3. Fails (sign).
 At r = 3: n = 7. LHS = 7(7−6) = 7. RHS = 9−3+1 = 7. ✓
-For r ≥ 4: n = 2^r − 1 grows exponentially, so n(n−2r) grows as
-Θ(4^r), while r²−r+1 grows as Θ(r²). No further intersections.
+For r ≥ 4: n = 2^r − 1 ≥ 3r, so n − 2r ≥ r, giving
+n(n−2r) ≥ 3r² > r²−r+1. No further intersections.
 
 **Unique nontrivial solution: r = 3.** ∎
 

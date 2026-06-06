@@ -24,7 +24,15 @@ provably unique within the Hamming family, and no other base-10
 full-reptend prime through p=47 exhibits comparable factorization
 alignment.
 
-## Definitions
+## Definition: Self-Describing
+
+A cyclic repetend (or Fermat quotient) is self-describing relative
+to a Hamming-family scaffold when the cyclotomic factor-blocks of
+(b^(n-1)-1)/n, in canonical base b = n+r, are exhausted by scaffold
+expressions in {n, k, r}. That is: every prime-power factor-block
+of the quotient appears in the scaffold grammar.
+
+## Parameters
 
 For r >= 2, define:
 - n = 2^r - 1 (Hamming code length; require n prime)
@@ -78,8 +86,8 @@ Setting equal to n(2n-1) and simplifying:
 At r = 1: 1(1-2) = -1, but r^2-r+1 = 1. Fails (sign mismatch).
 At r = 2: 3(3-4) = -3, but r^2-r+1 = 3. Fails (sign mismatch).
 At r = 3: 7(7-6) = 7, and r^2-r+1 = 7. Holds.
-For r >= 4: the left side grows as Theta(4^r) while the right grows
-as Theta(r^2). No further solutions.
+For r >= 4: n = 2^r - 1 >= 3r, so n - 2r >= r, giving
+n(n-2r) >= 3r * r = 3r^2 > r^2 - r + 1. No further solutions.
 
 **Unique nontrivial solution: r = 3.**
 

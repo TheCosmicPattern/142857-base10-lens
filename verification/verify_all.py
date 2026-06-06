@@ -155,19 +155,22 @@ def verify_uniqueness():
     # Condition 3: for prime r, 2^(2r)-2^r+1 ≡ 3 mod r, so r|3 => r=3
     # Note: n=2^r-1 prime implies r prime (contrapositive of: r composite =>
     # 2^r-1 composite), so Fermat's little theorem is licensed in the theorem's domain.
-    for r in [2, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47]:
+    for r in [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47]:
         if isprime(r):
             val = (2**(2*r) - 2**r + 1) % r
             if r == 3:
-                assert val == 0, f"FAIL at r=3"
+                assert val == 0, f"FAIL at r=3: expected 0, got {val}"
             else:
-                assert val == 3 % r, f"FAIL at r={r}: got {val}"
+                assert val == 3 % r, f"FAIL at r={r}: expected {3%r}, got {val}"
     print("  [PASS] Condition 3: 2^(2r)-2^r+1 ≡ 3 mod r (Fermat); r|3 => r=3")
     print("         (Note: applies for prime r; n=2^r-1 prime implies r prime)")
 
 def verify_null_test():
-    """5. Formal grammar null test — tests actual scaffold decomposition,
-    not just 'large factor exists'."""
+    """5. Base-10 full-reptend comparison screen through p<=47.
+    Tests scaffold decomposition for p=7 (should pass) and comparison
+    screen for other full-reptend primes (should fail). This is NOT
+    the uniqueness proof — that's Condition 1 in section 4. This is
+    the computational evidence that motivated the proof."""
 
     def repetend_integer(p):
         """Compute the repetend integer of 1/p in base 10 and its period."""
@@ -295,13 +298,18 @@ def verify_digit_invariants():
 def verify_generalization():
     """8. Verify that 142857's scaffold primes propagate into later cyclic numbers.
 
-    The key insight: Phi_1(10), Phi_2(10), Phi_3(10), Phi_6(10) contribute
-    primes {3, 7, 11, 13, 37} to any 10^m - 1 where 6 | m. So every cyclic
-    number whose period is divisible by 6 INHERITS these primes in its
-    factorization. When 6 doesn't divide the period, only {3, 11} survive
-    (from Phi_1 and Phi_2, since 1 and 2 divide every positive integer).
+    For a base-10 repetend with period m, every prime divisor of Phi_d(10)
+    for d | m appears in 10^m - 1. In the repetend integer (10^m - 1)/p,
+    any phi-prime equal to the denominator prime p is cancelled.
 
-    142857 is the kernel: the only case with NO additional Phi_d layers."""
+    When 6 | m: all primes from Phi_1..Phi_6 appear in 10^m - 1, so
+    {3, 7, 11, 13, 37} propagate into the repetend (minus p if p is
+    one of those primes — e.g., 7 cancels for p=7).
+
+    When 6 ∤ m: only Phi_1 and Phi_2 contribute (since 1 and 2 divide
+    every positive integer), so only {3, 11} survive.
+
+    142857 is the kernel: the only case with no additional Phi_d layers."""
     phi_primes = {3, 7, 11, 13, 37}  # all primes from Phi_1..Phi_6 at base 10
 
     def repetend_integer(p):
@@ -359,7 +367,7 @@ if __name__ == "__main__":
         ("2. Scaffold decomposition ({7,4,3} grammar)", verify_scaffold_decomposition),
         ("3. Cyclotomic structure", verify_cyclotomic),
         ("4. Uniqueness conditions", verify_uniqueness),
-        ("5. Null test (formal grammar)", verify_null_test),
+        ("5. Comparison screen (base-10 full-reptend, p<=47)", verify_null_test),
         ("6. Half-split arithmetic (with Q=143 derivation)", verify_half_split),
         ("7. Digit invariants", verify_digit_invariants),
         ("8. Generalization (phi-prime inheritance)", verify_generalization),

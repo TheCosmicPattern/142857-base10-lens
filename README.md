@@ -59,8 +59,8 @@ python3 verification/verify_all.py
 ```
 
 Expected output: 8 sections, all PASS. Tests factorization, scaffold
-grammar, cyclotomic structure, uniqueness conditions, formal grammar
-null test, half-split arithmetic with Q=143 derivation, digit invariants,
+grammar, cyclotomic structure, uniqueness conditions, base-10
+comparison screen, half-split arithmetic with Q=143 derivation, digit invariants,
 and phi-prime inheritance (generalization to all cyclic numbers).
 
 ## Files
