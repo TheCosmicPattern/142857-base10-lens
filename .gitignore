@@ -1,12 +1,23 @@
+# Build artifacts
 __pycache__/
 *.pyc
-.DS_Store
-*.swp
-*.tmp
 proof/*.aux
 proof/*.log
 proof/*.out
 proof/*.synctex.gz
+
+# System files
+.DS_Store
+*.swp
+*.tmp
+__MACOSX/
+
+# Draft/working files (not for public repo)
+docs/WRITEUP.txt
+docs/PROOF_COMMENT.txt
+docs/SUBSTACK_DRAFT.md
 docs/images_backup/
 *.zip
-__MACOSX/
+
+# Duplicate PDF (keep only docs/proof.pdf)
+proof/proof.pdf
